@@ -1,0 +1,32 @@
+
+<div id="profileModal" class="modal fade" role="dialog"  tab-index="-1" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="text_center">Member Profile</h4>
+           </div>
+
+           <div class="modal-body">
+              <table class="userprofile">
+                  <tr>
+                      <th class="userprofile_title">NickName: </th>
+                      <th class="userprofile_content"><%= post.author.local.nickname || post.author.google.name || post.author.facebook.name || post.author.github.name%></th>
+                  </tr>
+
+                  <tr>
+                      <th class="userprofile_title">Number of Posts: </th>
+                      <th class="userprofile_content"><%=count%></th>
+                  </tr>
+
+              </table>
+           </div>
+
+           <div class="modal-footer">
+              <button type="button" data-dismiss="modal">Close</button>
+           </div>
+
+       </div>
+   </div>
+
+</div>

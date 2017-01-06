@@ -1,0 +1,8 @@
+<% var method = []                %>
+<% if(user.google.token){         %>
+<%   method = user.google         %>
+<% }else if(user.facebook.token){ %>
+<%   method = user.facebook       %>
+<% }else if(user.local){          %>
+<%   method = user.local          %>
+<% }                              %>

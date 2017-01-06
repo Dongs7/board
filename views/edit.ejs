@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ./partials/head %>
+</head>
+<body>
+  <% include ./partials/navbar %>
+  <% include ./partials/header %>
+
+  <div class="container main">
+    <hr class='rows'>
+    <div class="new_wrapper">
+        <h3 class="text_center lead">Edit Post</h3>
+
+       <form class="form" action="/post/edit/<%= post._id%>?_method=put" method="post">
+        <label for="editTitle" class="sr-only">Thread Title</label>
+        <input type="text" id="inputTitle" class="form-control" name="edit[title]" placeholder="<%= post.title%>" required autofocus>
+        <div class="empty_row"></div>
+
+        <label for="editBody" class="sr-only">Thread Body</label>
+           <textarea type="nickname" id="inputBody" class="form-control" rows="10" name="edit[body]" placeholder="<%= post.body%>" required></textarea>
+        <div class="empty_row"></div>
+
+
+        <label for="editAuthor" class="sr-only">
+            <input type="text" name="edit[author]" value="<%= user._id%>">
+        </label>
+
+        <div class="col-md-6 col-xs-6">
+          <button class="btn btn-lg btn-primary btn-block" type="submit">DONE</button>
+        </div>
+
+        <div class="col-md-6 col-xs-6">
+          <a href="javascript:history.back()"><button class="btn btn-lg btn-danger btn-block" type="button">CANCEL</button></a>
+        </div>
+    </form>
+    </div>
+
+  </div>
+
+</body>
+</html>

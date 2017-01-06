@@ -1,0 +1,28 @@
+<nav class="nav navbar navbar-fixed-top navbar_container">
+  <div class="navbar-brand"><a href="/">Expess Board</a></div>
+
+  <% if(user) {%>
+    <% var method = []                %>
+    <% if(user.google.token){         %>
+    <%   method = user.google         %>
+    <% }else if(user.facebook.token){ %>
+    <%   method = user.facebook       %>
+    <% }else if(user.github.token){  %>
+    <%   method = user.github        %>
+    <% }else if(user.local){          %>
+    <%   method = user.local          %>
+
+    <%}%>
+
+       <a href="/logout"><button class="btn btn-info login float_right">Logout</button></a>
+
+       <%if (method.id == null){%>
+         <a href="/user/profile/<%= user._id%>"><button class="btn btn-danger login float_right"><small><span class="fa fa-user"></span> Hello <%= user.local.nickname%></small></button></a>
+       <%}else{%>
+         <a href="/user/profile/<%= user._id%>"><button class="btn btn-danger login float_right"><small><span class="fa fa-user"></span> Hello <%= method.name%></small></button></a>
+       <%}%>
+
+  <%}else{%>
+       <a href="/login"><button class="btn btn-info login float_right">Login</button></a>
+  <%}%>
+</nav>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+
+   <% include ./partials/navbar %>
+   <% include ./partials/header %>
+
+   <div class="container main">
+     <%if(user){%>
+       <a href="/post/new"><button class="float_right btn btn-default">new</button></a>
+       <%}%>
+       <hr class="rows">
+
+       <div class="board_wrapper clearfix underline">
+            <div class="col-xs-8">Title / Author / Start Date</div>
+            <div class="col-xs-2 text_center">Replies</div>
+            <div class="col-xs-2 text_center">Views</div>
+       </div>
+
+       <div class="border_content outer_wrapper">
+
+        <% data.forEach(function(e){ %>
+
+        <div class="inner_wrapper underline clearfix">
+              <div class="col-xs-8">
+                <div class="col-xs-12 title"><span><h4><a href="/post/view/<%= e._id%>"><%=e.title%></a></h4></span></div>
+                <div class="col-xs-12 title_sub">
+                        <h5><span class="title_sub_author">by <%= e.author.local.nickname || e.author.google.name || e.author.facebook.name || e.author.github.name || e.author.nickname%></span>
+                        <span class="title_sub_date">created at <%= moment(e.createdAt).format('lll')%></span></h5>
+                </div>
+              </div>
+
+              <div class="col-xs-2 text_center">
+                <span><h5><%= e.comment.length%></h5></span>
+              </div>
+
+              <div class="col-xs-2 text_center">
+                <span><h5><%= e.counter%></h5></span>
+              </div>
+        </div>
+        <% }) %>
+       </div>
+       <% if( count > 5){%>
+       <div class="container text_center">
+           <ul class="pagination">
+            <% for(i = 1; i<=maxPage; i++){ %>
+                <% if(i == page){%>
+                  <li class="active"><a href="/post?page=<%= i %>"> <%= i %> </a></li>
+                <%}else{%>
+                  <li class=""><a href="/post?page=<%= i %>"> <%= i %> </a></li>
+                <%}%>
+            <%}%>
+          </ul>
+       </div>
+       <%}%>
+   </div>
+</body>
+</html>

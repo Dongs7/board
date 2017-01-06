@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ./partials/head %>
+</head>
+<body>
+  <% include ./partials/navbar %>
+  <% include ./partials/header %>
+
+  <div class="container main">
+    <hr class='row'>
+    <div class="profile_wrapper">
+        <h3 class="text_center lead">Member Profile</h3>
+
+        <div class="col-xs-6 text_right bold">Nickname :</div>
+        <div class="col-xs-6 text_left"><%= nickname  %></div>
+        <div class="col-xs-6 text_right bold">Number of Posts :</div>
+        <div class="col-xs-6 text_left"><%= result.numPost%></div>
+    </div>
+
+  </div>
+
+</body>
+</html>

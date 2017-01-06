@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <% include partials/head %>
+</head>
+
+<body>
+   <% include ./partials/navbar %>
+   <% include ./partials/header %>
+   <% include ./partials/deleteHelper %>
+   <% include ./partials/profileHelper %>
+
+
+   <div class="container main">
+      <hr class="rows">
+      <div class="thread_title clearfix">
+          <div class="col-xs-12"><h3><%= post.title%></h3></div>
+          <div class="col-xs-6 italic">by <%= post.author.local.nickname || post.author.google.name || post.author.facebook.name || post.author.github.name || post.author.nickname%></div>
+          <div class="col-xs-6 text_right italic">Created at: <%= moment(post.createdAt).format('lll')%></div>
+          <%if(post.updatedAt){%>
+            <div class="col-xs-12 text_right italic">Edited at: <%= moment(post.updatedAt).format('lll')%></div>
+          <%}%>
+      </div>
+      <div class="empty_row"></div>
+
+      <div class="thread clearfix">
+          <div class="col-xs-12 thread_time">
+              <%= moment(post.createdAt).format('lll')%>
+              <% if (user && user.equals(post.author._id)){%>
+                <button title="delete" type="button" class="float_right tool" data-toggle="modal" data-target="#deleteModal"><span class="fa fa-trash"></span></button>
+                <a href="/post/edit/<%= post._id%>"><button title="edit" type="button" class="float_right tool"><span class="fa fa-pencil"></span></button></a>
+              <%}%>
+          </div>
+
+          <div class="row-eq-height thread_border">
+              <div class="col-xs-3 thread_author">
+                  <button class="btn-link" type="button" data-toggle="modal" data-target="#profileModal"><b><%= post.author.local.nickname || post.author.google.name || post.author.facebook.name || post.author.github.name%> [ OP ]</b></button>
+              </div>
+
+              <div class="col-xs-9 thread_body">
+                 <div class="thread_sub thread_sub_title">
+                     <h4><b><%= post.title%></b></h4>
+                 </div>
+
+                 <div class="empty_row"></div>
+
+                 <div class="thread_sub thread_sub_body">
+                     <%= post.body%>
+                 </div>
+
+                 <div class="thread_footer">
+                      <hr class="rows">
+                      <button class="float_right btn-link commentHelper">Reply <span class="fa fa-reply"></span></button>
+                 </div> <!-- thread_footer END-->
+              </div> <!-- thread_body END-->
+          </div> <!-- thread_board END-->
+          <div class="thread_tool">
+               <a class="back" href="/"><span class="fa fa-arrow-left"></span> back to the list</a>
+          </div>
+      </div> <!-- thread END-->
+   </div> <!--main END-->
+
+   <div class="empty_row"></div>
+
+   <!-- CommentHelper section -->
+   <% include ./partials/commentHelper %>
+
+   <!--Comment View if comments exist-->
+   <%if (post.comment && post.comment.length > 0 ){%>
+       <% post.comment.forEach(function(comment){%>
+
+           <div class="container comment_Wrapper">
+               <div class="comment">
+                   <div class="col-xs-12 comment_time">
+                       <%= moment(comment.createdAt).format('lll')%>
+                       <% if (user && user.equals(comment.author._id)){%>
+                          <form class="commentDelete" action="/post/view/<%= post._id%>/delete/comment/<%= comment._id%>?_method=delete" method="post">
+                            <button title="delete" type="button" class="float_right tool" onclick="confirm('Do you want to delete this comment?')?this.parentElement.submit():null"><span class="fa fa-trash"></span></button>
+                          </form>
+                       <%}%>
+                   </div>
+
+                   <div class="row-eq-height comment_border">
+                      <div class="col-xs-3 comment_author">
+                       <span><b>Reply from</b></span>
+                        <a href="/user/post/profile/<%= comment.author._id%>"><button class="btn-link" type="button"><b><%= comment.author.local.nickname || comment.author.google.name || comment.author.facebook.name || comment.author.github.name%></b></button></a>
+                      </div>
+
+                      <div class="col-xs-9 comment_body">
+                          <%= comment.body%>
+                      </div>
+
+                   </div>
+               </div>
+           </div>
+           <div class="empty_row"></div>
+       <%})%>
+
+    <!--  구글 연동 리스폰시브 체크, 깃허브올리기   -->
+   <%}%>
+</body>
+</html>

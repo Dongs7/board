@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ./partials/head %>
+</head>
+<body>
+  <% include ./partials/navbar %>
+  <% include ./partials/header %>
+
+  <div class="container main">
+    <hr class='rows'>
+    <div class="new_wrapper">
+        <h3 class="text_center lead">Create New Post</h3>
+
+       <form class="form" action="/post/new" method="post">
+        <label for="newTitle" class="sr-only">Thread Title</label>
+        <input type="text" id="inputTitle" class="form-control" name="new[title]" placeholder="Enter Title here" required autofocus>
+        <div class="empty_row"></div>
+
+
+        <label for="newBody" class="sr-only">Thread Body</label>
+           <textarea type="nickname" id="inputBody" class="form-control" rows="10" name="new[body]" placeholder="Contents here" required></textarea>
+        <div class="empty_row"></div>
+
+        <label for="newAuthor" class="sr-only">
+            <input type="text" name="new[author]" value="<%= user._id%>">
+        </label>
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Publish</button>
+        <a class="back" href="/"><button class="btn btn-lg btn-danger btn-block" type="button">Cancel</button></a>
+    </form>
+    
+    </div>
+
+  </div>
+
+</body>
+</html>

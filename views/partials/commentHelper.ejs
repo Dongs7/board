@@ -1,0 +1,16 @@
+
+  <div class="container comment_Pane">
+   <div class="col-xs-12 debug">
+      <form action="/post/view/<%= post._id%>/comment" method="post">
+           <label for="newCommentAuthor" class="sr-only">
+                <input type="text" name="comment[author]" value="<%= user._id%>">
+           </label>
+           <textarea class="comment" name="comment[body]" rows="3" autofocus></textarea>
+           <div class="comment_footer">
+               <button class="float_right btn-link" type="submit">submit</button>
+           </div>
+       </form>
+   </div>
+
+</div>
+<div class="empty_row"></div>
